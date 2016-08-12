@@ -18,6 +18,49 @@ server:
   private-address: fd00::/8
   private-address: fe80::/10
 
+  local-zone: 10.in-addr.arpa transparent
+  local-zone: 192.in-addr.arpa transparent
+  # our evbops.com NS
+  private-domain: "evbops.com"
+  private-domain: "evbhome.com"
+  private-domain: "aws-us-east-1.evbops.com"
+  private-domain: "tritip.net"
+  private-domain: "service.evb"
+  private-domain: "service.evbstage"
+  private-domain: "service.evbqa"
+
+  stub-zone:
+    name: "aws-us-east-1.evbops.com."
+    stub-addr: 172.21.198.112
+    stub-first: yes
+
+  stub-zone:
+    name: "evbops.com."
+    stub-addr: 172.21.5.102
+    stub-first: yes
+
+  stub-zone:
+    name: "evbhome.com."
+    stub-addr: 172.21.5.102
+    stub-first: yes
+
+  stub-zone:
+    name: "tritip.net."
+    stub-addr: 192.168.6.1
+    stub-first: yes
+
+  forward-zone:
+    name: "evb."
+    forward-addr: 172.21.5.102
+
+  forward-zone:
+    name: "evbstage."
+    forward-addr: 172.21.5.102
+
+  forward-zone:
+    name: "evbqa."
+    forward-addr: 172.21.5.102
+
 {% if unbound.nameservers %}
   # Define DNS servers to forward queries to.
   forward-zone:
@@ -26,3 +69,4 @@ server:
     forward-addr: {{ nameserver }}
     {% endfor %}
 {% endif %}
+

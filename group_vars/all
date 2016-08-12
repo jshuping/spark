@@ -1,19 +1,19 @@
 user:
-    name: pigmonkey
+    name: john
     uid: 1000
-    group: pigmonkey
-    shell: /usr/bin/zsh
-    email:  peter@havenaut.net
+    group: john
+    shell: /bin/bash
+    email:  john@librum.org
     log:
         dir: log
         rotate: 8
 
-hostname: nous
+hostname: bey
 
-dotfiles:
-    url: git@github.com:pigmonkey/dotfiles.git
-    destination: projects/dotfiles
-    rcup_flags: -fx README.md
+#dotfiles:
+#    url: git@github.com:pigmonkey/dotfiles.git
+#    destination: .dotfiles
+#    rcup_flags: -fx README.md
 
 aur:
     dir: aur
@@ -27,33 +27,31 @@ aur:
 
 ssh:
     port: 22
-    user_key: /root/id_rsa
+    #user_key: /root/id_rsa
     enable_sshd: False
 
 gnupg:
     enable_agent: True
-    emulate_ssh: True
+    emulate_ssh: False
 
 mail:
     sync_tool: isync
-    sync_pim: True
-    sync_taskwarrior: True
-    sync_notmuch: False
+    sync_pim: False
+    sync_taskwarrior: False
+    sync_notmuch: True
     sync_time: 5min
     sync_boot_delay: 2min
     sync_on: trusted
 
 network:
-    spoof_mac: True
+    spoof_mac: False
     conn_check:
         interval: 0
     trusted_uuid:
-        - b21284e6-01af-492f-8bea-45a69ef22a23
-        - 4ddd6988-aad1-4927-b650-ea7d24e0138b
-        - f9b3c62c-2d9f-450a-ac9b-528ba4c85ded
-        - b94375d1-70f8-424f-a6d7-dc52d0ab7288
-        - f74f2bd5-8748-4e1e-98f9-dae2dd44b916
-        - faeec88c-79ec-4840-ab25-ea356af8a81b
+        - 7fcc723a-4550-41ad-9d89-03cfe5866c58
+        - 5eada3a1-7bf2-472e-9cca-88124f370a17
+        - d705a453-d4d2-414b-a651-c47c79e74881
+        - f795c8f9-dcb3-4118-9516-775da073f28f
 
 editors:
     - gvim
@@ -82,6 +80,7 @@ base_packages:
     - arch-wiki-docs
     - python-keyring
     - python-secretstorage
+    - fabric
     - tig
     - ruby
     - pv
@@ -112,6 +111,7 @@ browser_choices:
 
 passwordless_sudo:
     - /usr/bin/openvpn*
+    - /usr/bin/systemctl restart unbound
 
 tarsnapper:
   deltas: 1h 1d 7d 30d 365d
@@ -124,31 +124,31 @@ gitannex:
     stop_on_untrusted: True
 
 bitlbee:
+    torify: False
     run_on: trusted
-    torify: True
 
 bootloader: grub
 
 postgresql:
-    enable: True
+    enable: False
     root: /home/postgres
 
 fingerprint: False
 
 tor:
-    run_on: trusted
+    run_on: none
 
 localtime:
     run_on: trusted
 
 unbound:
-    tls: True
+    tls: False
     nameservers:
-        - 1.1.1.1@853  # Cloudflare
-        - 9.9.9.9@853  # Quad9
+        - 208.67.222.222
+        - 208.67.220.220
 
 bluetooth:
-    disable: False
+    disable: True
 
 firejail:
     blacklist:
@@ -163,37 +163,37 @@ firejail:
         - ~/.vdirsyncer
         - ~/library
 
-cryptshot:
-    - name: alta
-      uuid: 0a0db776-84c5-48e1-9079-cacfbc5de8a3
-      keyfile: /home/pigmonkey/.keys/usb-alta.key
-      retain:
-        - level: daily
-          interval: 7
-        - level: weekly
-          interval: 6
-        - level: monthly
-          interval: 3
-    - name: bishorn
-      uuid: baeb40a2-b19e-4adc-8ef6-44ee720a4d1a
-      keyfile: /home/pigmonkey/.keys/usb-bishorn.key
-      retain:
-        - level: daily
-          interval: 7
-        - level: weekly
-          interval: 6
-        - level: monthly
-          interval: 3
-    - name: pilchuck
-      uuid: d96a0fc3-7ea1-42f7-b0d0-42e573c478bd
-      keyfile: /home/pigmonkey/.keys/usb-pilchuck.key
-      retain:
-        - level: daily
-          interval: 7
-        - level: weekly
-          interval: 6
-        - level: monthly
-          interval: 3
+#cryptshot:
+#    - name: alta
+#      uuid: 0a0db776-84c5-48e1-9079-cacfbc5de8a3
+#      keyfile: /home/pigmonkey/.keys/usb-alta.key
+#      retain:
+#        - level: daily
+#          interval: 7
+#        - level: weekly
+#          interval: 6
+#        - level: monthly
+#          interval: 3
+#    - name: bishorn
+#      uuid: baeb40a2-b19e-4adc-8ef6-44ee720a4d1a
+#      keyfile: /home/pigmonkey/.keys/usb-bishorn.key
+#      retain:
+#        - level: daily
+#          interval: 7
+#        - level: weekly
+#          interval: 6
+#        - level: monthly
+#          interval: 3
+#    - name: pilchuck
+#      uuid: d96a0fc3-7ea1-42f7-b0d0-42e573c478bd
+#      keyfile: /home/pigmonkey/.keys/usb-pilchuck.key
+#      retain:
+#        - level: daily
+#          interval: 7
+#        - level: weekly
+#          interval: 6
+#        - level: monthly
+#          interval: 3
 
 journal:
     max_size: 500M
@@ -218,17 +218,17 @@ goesimage:
     flags: -w -e
 
 libinput:
-    middle_click_scroll: 12
-    button_mapping: "1 2 3 4 5 6 7 8 9 10 11 2"
+#    middle_click_scroll: 12
+#    button_mapping: "1 2 3 4 5 6 7 8 9 10 11 2"
 
 display_manager: lightdm
-gdm:
-    sound: False
-    font_scaling_factor: 1
-    logo_path: False
-    touchpad:
-        tap_to_click: True
-    accessibility_menu: True
+#gdm:
+#    sound: False
+#    font_scaling_factor: 1
+#    logo_path: False
+#    touchpad:
+#        tap_to_click: True
+#    accessibility_menu: True
 
 desktop_environment: i3
 gnome:
@@ -291,7 +291,7 @@ aur_fonts:
     - ttf-symbola
 
 syncthing:
-    run_on: trusted
+    run_on: None
 
 mirrorlist:
     run_on: trusted
@@ -299,4 +299,4 @@ mirrorlist:
 units:
     run_on: trusted
 
-kernel_parameters: "quiet consoleblank=60 i915.enable_psr=2"
+#kernel_parameters: "quiet consoleblank=60 i915.enable_psr=2"
